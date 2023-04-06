@@ -17,11 +17,11 @@ Future<void> fixAndroidManifestFile() async {
     return;
   }
 
-  const originalString = r'android:label="([^"]+)"';
+  const originalStringRegEx = r'android:label="([^"]+)"';
   const replaceString = 'android:label="@string/app_name"';
 
   var contents = file.readAsStringSync();
-  contents = contents.replaceAllMapped(RegExp(originalString), (match) {
+  contents = contents.replaceAllMapped(RegExp(originalStringRegEx), (match) {
     return replaceString;
   });
   file.writeAsStringSync(contents);
