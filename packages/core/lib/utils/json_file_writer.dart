@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter_flavor_gen_core/utils/logger.dart';
+
 void jsonFileWriter({
   required String fileName,
   required Map<String, dynamic> json,
@@ -10,5 +12,5 @@ void jsonFileWriter({
 
   final file = File(fileName)..writeAsStringSync(formattedJsonString);
 
-  print('json file write:\n${file.path}\n');
+  L.log.info('json file write:\n${file.path}\n');
 }

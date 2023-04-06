@@ -10,7 +10,6 @@ import 'package:flutter_flavor_gen_core/functions/parse_args.dart';
 import 'package:flutter_flavor_gen_core/utils/cast.dart';
 import 'package:flutter_flavor_gen_core/utils/log_template.dart';
 import 'package:flutter_flavor_gen_core/utils/logger.dart';
-import 'package:mason_logger/mason_logger.dart';
 import 'package:path/path.dart' as p;
 
 void mainScript(List<String> arguments) {

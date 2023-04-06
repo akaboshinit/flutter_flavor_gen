@@ -1,5 +1,6 @@
 import 'package:args/args.dart';
 import 'package:flutter_flavor_gen_core/utils/fail.dart';
+import 'package:flutter_flavor_gen_core/utils/logger.dart';
 
 ArgResults parseArgs(List<String> arguments) {
   final parser = ArgParser()
@@ -13,17 +14,13 @@ ArgResults parseArgs(List<String> arguments) {
       abbr: 'v',
       help: 'Show version number',
     )
-    ..addOption(
-      'target',
-      abbr: 't',
-    )
     ..addOption('file', abbr: 'f');
 
   final result = parser.parse(arguments);
 
   final help = result['help'] as bool;
   if (help) {
-    print(parser.usage);
+    L.log.info(parser.usage);
     fail();
   }
   return result;

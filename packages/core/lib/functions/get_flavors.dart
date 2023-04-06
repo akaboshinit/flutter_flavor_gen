@@ -5,6 +5,8 @@ import 'package:analyzer/dart/analysis/utilities.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:flutter_flavor_gen_core/freezed/flavors.dart';
 import 'package:flutter_flavor_gen_core/utils/fail.dart';
+import 'package:flutter_flavor_gen_core/utils/log_template.dart';
+import 'package:flutter_flavor_gen_core/utils/logger.dart';
 
 Future<Flavors> getFlavors(File flavorFile) async {
   final flavorsJson = await flavorsFileToJson(flavorFile);
@@ -53,20 +55,24 @@ void main() {
   final result = await Process.run('dart', [tempFile.path]);
 
   if (result.stderr != '') {
-    print(result.stderr);
-    print('error:flavorFileGet');
+    errorLog(
+      action: 'flavorFileGet',
+      error: result.stderr,
+    );
     tempDir.deleteSync(recursive: true);
     fail();
   }
 
   final output = result.stdout;
   if (output is! String) {
-    print('error:flavorFileGet:NotString');
+    errorLog(
+      action: 'flavorFileGet:NotString',
+    );
     tempDir.deleteSync(recursive: true);
     fail();
   }
 
-  print('tmpdir:${tempDir.path}');
+  L.log.info('tmp dir:${tempDir.path}');
   tempDir.deleteSync(recursive: true);
 
   return output;

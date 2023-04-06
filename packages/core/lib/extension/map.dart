@@ -41,6 +41,7 @@ extension MapExt on Map<String, dynamic> {
         final variableType = reflect(value).type;
         final toJsonMethod = variableType.declarations[const Symbol('toJson')];
         if (toJsonMethod != null) {
+          // ignore: avoid_dynamic_calls
           final valueJson = value.toJson() as Map<String, dynamic>;
           return step(
             valueJson,
