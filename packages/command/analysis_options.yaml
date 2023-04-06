@@ -1,0 +1,9 @@
+include: package:pedantic_mono/analysis_options.yaml
+
+# linter:
+#   rules:
+#     - camel_case_types
+
+# analyzer:
+#   exclude:
+#     - 'example'

@@ -1,0 +1,36 @@
+name: FlutterFlavorGen
+
+packages:
+  - packages/**
+  # - examples/**
+
+scripts:
+  get:
+    run: melos bs
+    description: flutter pub get
+
+  upgrade:
+    run: melos exec -- flutter pub upgrade
+    description: flutter pub upgrade
+
+  analyze:
+    run: dart analyze .
+    description: dart analyze
+
+  format:
+    run: dart format --set-exit-if-changed .
+    description: dart format --set-exit-if-changed .
+
+  build_runner:
+    run: |
+      melos exec -- dart pub run build_runner build --delete-conflicting-outputs
+    select-package:
+      scope: flutter_flavor_gen_core
+      # ignore:
+      #   - example
+      depends-on: build_runner
+    description: dart pub run build_runner build --delete-conflicting-outputs
+
+  postclean:
+    run: melos exec -c 6 -- flutter clean
+    description: flutter clean

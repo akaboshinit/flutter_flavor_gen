@@ -1,0 +1,24 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "flutter",
+            "command": "flutter",
+            "args": [
+                "pub",
+                "run",
+                "flutter_flavor_gen",
+                // "--file",
+                // "flavors/flavors.dart"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "options": {
+                "cwd": "packages/command/example"
+            },
+            "label": "Run on flutter_flavor_gen"
+        }
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "android_appName": "[s]example",
+    "android_appId": "com.example.app.stg",
+    "iOS_appName": "[s]example",
+    "iOS_appId": "com.example.app.stg",
+    "flavor": "stg"
+}
