@@ -50,12 +50,13 @@ void main() {
   final tempFile =
       await File('${tempDir.path}/flutter_flavor_gen_temp_script.dart')
           .create();
+  // L.log.info('tmp dir:${tempDir.path}');
   await tempFile.writeAsString(sourceCode);
 
   final result = await Process.run('dart', [tempFile.path]);
 
   if (result.stderr != '') {
-    errorLog(
+    logError(
       action: 'flavorFileGet',
       error: result.stderr,
     );
@@ -65,14 +66,13 @@ void main() {
 
   final output = result.stdout;
   if (output is! String) {
-    errorLog(
+    logError(
       action: 'flavorFileGet:NotString',
     );
     tempDir.deleteSync(recursive: true);
     fail();
   }
 
-  L.log.info('tmp dir:${tempDir.path}');
   tempDir.deleteSync(recursive: true);
 
   return output;

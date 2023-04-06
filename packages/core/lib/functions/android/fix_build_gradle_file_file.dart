@@ -26,7 +26,7 @@ Future<void> fixBuildGradleFile() async {
   final lines = file.readAsLinesSync();
   final index = lines.indexWhere((line) => line.contains(searchText));
   if (index == -1 || index + 1 > lines.length) {
-    errorLog(action: 'Failed to find $searchText in build.gradle');
+    logError(action: 'Failed to find $searchText in build.gradle');
     fail();
   }
 

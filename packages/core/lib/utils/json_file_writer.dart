@@ -1,16 +1,32 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter_flavor_gen_core/utils/log_template.dart';
 import 'package:flutter_flavor_gen_core/utils/logger.dart';
 
-void jsonFileWriter({
+Future<void> jsonFileWriter({
   required String fileName,
   required Map<String, dynamic> json,
-}) {
+}) async {
   const encoder = JsonEncoder.withIndent('    ');
   final formattedJsonString = encoder.convert(json);
 
-  final file = File(fileName)..writeAsStringSync(formattedJsonString);
+  final file = File(fileName);
 
-  L.log.info('json file write:\n${file.path}\n');
+  final progress = L.log.progress(
+    'Running "write file: ${file.path}"',
+  );
+
+  logIndent();
+
+  try {
+    await file.writeAsString(formattedJsonString);
+    progress.complete('Generated file: ${file.path}');
+  } on Exception catch (e) {
+    logError(
+      action: 'Generated failed: ${file.path}',
+      error: e,
+      progress: progress,
+    );
+  }
 }

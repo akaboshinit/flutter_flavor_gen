@@ -17,10 +17,12 @@ void mainScript(List<String> arguments) {
 }
 
 Future<void> script(List<String> arguments) async {
+  L.log.info('🏁 🏁 🏁 flavor generate start 🚙 🏍️ 🏎');
+
   final safeResults = Result(() => parseArgs(arguments));
 
   if (safeResults.isError || !safeResults.isValue) {
-    errorLog(
+    logError(
       action: 'Arguments Read',
       error: safeResults.asError!.error,
     );
@@ -42,48 +44,69 @@ Future<void> script(List<String> arguments) async {
   final safeGetFlavors = await Result.capture(getFlavors(flavorFile));
 
   if (safeGetFlavors.isError || !safeResults.isValue) {
-    errorLog(
+    logError(
       action: 'GetFlavors',
       error: safeGetFlavors.asError!.error,
     );
     return;
   }
 
+  logIndent();
+
   final safeFlavorsWriteResult =
-      Result(() => flavorsFileWriter(safeGetFlavors.asValue!.value));
+      await Result.capture(flavorsFileWriter(safeGetFlavors.asValue!.value));
 
   if (safeFlavorsWriteResult.isError) {
-    errorLog(
+    logError(
       action: 'FlavorsWrite',
       error: safeFlavorsWriteResult.asError!.error,
     );
     return;
   }
 
-  final safeFixIosFilesResult = Result(fixIosFiles);
+  final safeFixIosFilesResult = await Result.capture(fixIosFiles());
   if (safeFixIosFilesResult.isError) {
-    errorLog(
+    logError(
       action: 'FixIosFiles',
       error: safeFixIosFilesResult.asError!.error,
     );
     return;
   }
 
-  final safeFixAndroidFilesResult = Result(fixAndroidFiles);
+  final safeFixAndroidFilesResult = await Result.capture(fixAndroidFiles());
   if (safeFixAndroidFilesResult.isError) {
-    errorLog(
+    logError(
       action: 'fixAndroidFiles',
       error: safeFixAndroidFilesResult.asError!.error,
     );
     return;
   }
 
+  logIndent();
+
+  final flavorNames = safeGetFlavors.asValue!.value.flavors.keys.toList();
+  for (final flavor in flavorNames) {
+    L.log.info('''
+flavor: $flavor
+↓flutter flavor start-command↓\nflutter run --dart-define-from-file=flavors/.NOT_EDIT/define_flavor/$flavor.json
+''');
+  }
+
   L.log.info('''
-prd\nflutter run --debug --dart-define-from-file=flavors/.NOT_EDIT/define_flavor/\$prd.json\nconst flavor = String.fromEnvironment('flavor');
-dev\nflutter run --debug --dart-define-from-file=flavors/.NOT_EDIT/define_flavor/\$dev.json
+in code:
+```
+final currentFlavor = Flavor.values.byName(
+  const String.fromEnvironment('flavor'),
+);
+enum Flavor {
+  ${flavorNames.join(",\n  ")}
+}
+```
 ''');
 
-  L.log.success('completed!!!');
+  logIndent();
+
+  L.log.success('🕺 💃 🕺 flavor generate completed 💃 🕺 💃');
 
   // final installProgress = L.log.progress(
   //   'Running "flutter packages get" in \$cwd',

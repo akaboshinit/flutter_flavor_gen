@@ -2,12 +2,12 @@ import 'package:flutter_flavor_gen_core/extension/map.dart';
 import 'package:flutter_flavor_gen_core/freezed/flavors.dart';
 import 'package:flutter_flavor_gen_core/utils/json_file_writer.dart';
 
-void flavorsFileWriter(Flavors flavors) {
-  flavors.flavors.forEach((flavorName, flavorPlatforms) {
+Future<void> flavorsFileWriter(Flavors flavors) async {
+  flavors.flavors.forEach((flavorName, flavorPlatforms) async {
     final json = flavorPlatforms.toJson().flatJson()
       ..addAll({'flavor': flavorName});
 
     final fileName = 'flavors/.NOT_EDIT/define_flavor/$flavorName.json';
-    jsonFileWriter(fileName: fileName, json: json);
+    await jsonFileWriter(fileName: fileName, json: json);
   });
 }
