@@ -4,6 +4,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'platforms.freezed.dart';
 part 'platforms.g.dart';
 
+enum FlavorPlatformsEnum { android, iOS }
+
 @freezed
 abstract class FlavorPlatforms with _$FlavorPlatforms {
   const factory FlavorPlatforms({

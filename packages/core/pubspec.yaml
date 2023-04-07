@@ -4,7 +4,7 @@ version: 0.0.1
 # repository: https://github.com/my_org/my_repo
 
 environment:
-  sdk: '>=2.19.2 <3.0.0'
+  sdk: '>=2.19.0 <3.0.0'
 
 dependencies:
   analyzer: ^5.10.0
@@ -21,3 +21,4 @@ dev_dependencies:
   json_serializable: ^6.6.1
   pedantic_mono: ^1.21.1
   test: ^1.21.0
+  version_gen:

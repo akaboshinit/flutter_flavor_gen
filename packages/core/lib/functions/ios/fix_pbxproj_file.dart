@@ -1,12 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter_flavor_gen_core/utils/add_file_edit_comment.dart';
+import 'package:flutter_flavor_gen_core/utils/path.dart';
 import 'package:flutter_flavor_gen_core/utils/string.dart';
-import 'package:path/path.dart' as p;
+import 'package:path/path.dart';
 
 Future<void> fixProjectPbxprojFile() async {
   final filePath =
-      p.Context().joinAll(['ios', 'Runner.xcodeproj', 'project.pbxproj']);
+      Path.rootDir + joinAll(['ios', 'Runner.xcodeproj', 'project.pbxproj']);
 
   final file = File(filePath);
   final isEdited = await addFileEditComment(

@@ -1,11 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter_flavor_gen_core/utils/add_file_edit_comment.dart';
-import 'package:path/path.dart' as p;
+import 'package:flutter_flavor_gen_core/utils/path.dart';
+import 'package:path/path.dart';
 
 Future<void> fixAndroidManifestFile() async {
-  final filePath = p.Context()
-      .joinAll(['android', 'app', 'src', 'main', 'AndroidManifest.xml']);
+  final filePath = Path.rootDir +
+      joinAll(['android', 'app', 'src', 'main', 'AndroidManifest.xml']);
 
   final file = File(filePath);
   final isEdited = await addFileEditComment(

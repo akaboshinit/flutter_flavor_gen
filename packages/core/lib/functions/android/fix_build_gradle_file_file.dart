@@ -3,10 +3,11 @@ import 'dart:io';
 import 'package:flutter_flavor_gen_core/utils/add_file_edit_comment.dart';
 import 'package:flutter_flavor_gen_core/utils/fail.dart';
 import 'package:flutter_flavor_gen_core/utils/log_template.dart';
-import 'package:path/path.dart' as p;
+import 'package:flutter_flavor_gen_core/utils/path.dart';
+import 'package:path/path.dart';
 
 Future<void> fixBuildGradleFile() async {
-  final filePath = p.Context().joinAll(['android', 'app', 'build.gradle']);
+  final filePath = Path.rootDir + joinAll(['android', 'app', 'build.gradle']);
   const appId = 'android_appId';
   const appName = 'android_appName';
 
@@ -27,7 +28,7 @@ Future<void> fixBuildGradleFile() async {
   final index = lines.indexWhere((line) => line.contains(searchText));
   if (index == -1 || index + 1 > lines.length) {
     logError(action: 'Failed to find $searchText in build.gradle');
-    fail();
+    endScript();
   }
 
   final copy = lines[index];

@@ -1,5 +1,5 @@
 import 'dart:io';
 
-Never fail() {
+Never endScript() {
   return exit(0);
 }

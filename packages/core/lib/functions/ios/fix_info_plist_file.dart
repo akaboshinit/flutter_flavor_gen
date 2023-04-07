@@ -1,11 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter_flavor_gen_core/utils/add_file_edit_comment.dart';
+import 'package:flutter_flavor_gen_core/utils/path.dart';
 import 'package:flutter_flavor_gen_core/utils/string.dart';
-import 'package:path/path.dart' as p;
+import 'package:path/path.dart';
 
 Future<void> fixInfoPlistFile() async {
-  final filePath = p.Context().joinAll(['ios', 'Runner', 'Info.plist']);
+  final filePath = Path.rootDir + joinAll(['ios', 'Runner', 'Info.plist']);
 
   final file = File(filePath);
   final isEdited = await addFileEditComment(

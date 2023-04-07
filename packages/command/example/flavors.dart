@@ -1,13 +1,5 @@
-## Getting Started
+import 'package:flutter_flavor_gen/flutter_flavor_gen.dart';
 
-## step 1
-```
-flutter pub run flutter_flavor_gen init
-```
-
-## step 2
-Edit "flavor/flavor.dart" your flavor
-```
 const flavors = Flavors(
   flavors: {
     'prd': FlavorPlatforms(
@@ -42,14 +34,3 @@ const flavors = Flavors(
     )
   },
 );
-```
-
-## step 3
-```
-flutter pub run flutter_flavor_gen
-```
-
-## step 4
-```
-flutter run --dart-define-from-file=flavors/DO_NOT_MODIFY/define_flavor/$flavor.json
-```

@@ -2,6 +2,7 @@
     "dart.runPubGetOnPubspecChanges": "never",
     "dart.projectSearchDepth": 4,
     "cSpell.words": [
+        "pubspec",
         "unawaited",
         "writeln"
     ],

@@ -5,13 +5,13 @@ import 'package:flutter_flavor_gen_core/utils/log_template.dart';
 import 'package:flutter_flavor_gen_core/utils/logger.dart';
 
 Future<void> jsonFileWriter({
-  required String fileName,
+  required String filePath,
   required Map<String, dynamic> json,
 }) async {
   const encoder = JsonEncoder.withIndent('    ');
   final formattedJsonString = encoder.convert(json);
 
-  final file = File(fileName);
+  final file = File(filePath);
 
   final progress = L.log.progress(
     'Running "write file: ${file.path}"',
@@ -20,7 +20,10 @@ Future<void> jsonFileWriter({
   logIndent();
 
   try {
-    await file.writeAsString(formattedJsonString);
+    await file.create(recursive: true);
+    await file.writeAsString(
+      formattedJsonString,
+    );
     progress.complete('Generated file: ${file.path}');
   } on Exception catch (e) {
     logError(

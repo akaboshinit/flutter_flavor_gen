@@ -19,6 +19,26 @@
                 "cwd": "packages/command/example"
             },
             "label": "Run on flutter_flavor_gen"
+        },
+        {
+            "type": "flutter",
+            "command": "flutter",
+            "args": [
+                "pub",
+                "run",
+                "flutter_flavor_gen",
+                "init",
+                "--target",
+                "iOS"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "options": {
+                "cwd": "packages/command/example"
+            },
+            "label": "Run on flutter_flavor_gen init"
         }
     ]
 }
